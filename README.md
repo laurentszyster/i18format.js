@@ -6,6 +6,12 @@ This is not a templating library, but if your JavaScript application demands int
 
 Synopsis
 ---
+Pick an alias for `window.i18format` that suites you:
+
+```
+var i18 = window.i18format;
+```
+
 Set a named language as a map of text and format strings :
 
 ```
