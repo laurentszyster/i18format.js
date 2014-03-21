@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>i18format.js/tests.html</title>
+<link rel="stylesheet" href="deps/qunit-1.11.0.css" type="text/css" />
+<script type="text/javascript" src="deps/qunit-1.11.0.js"></script>
+</head>
+<body>
+<h1 id="qunit-header">i18format.js/tests.html</h1>
+<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture"></div>
+<script type="text/javascript" src="i18format.js"></script>
+<script type="text/javascript" src="tests.js">
+
+test("window.i18format", function(){
+	var i18 = window.i18format;
+	equal(
+		i18("Test {}, {}, {}.", 1, 2, 3),
+		"Test 1, 2, 3.",
+		"ordered parameters"
+		);
+	equal(
+		i18("Test {2}, {1}, {0}.", 1, 2, 3),
+		"Test 3, 2, 1.",
+		"positional parameters"
+		);
+	equal(
+		i18.apply({x:3, y:2, z:1}, ["Test {x}, {y}, {z}."]),
+		"Test 3, 2, 1.",
+		"named parameters"
+		);
+	i18.setLanguage("FR", {
+		"Hello {}!": "Salut {}!",
+		"World": "Monde"
+		});
+	equal(
+		i18("Hello {}!", i18("World")),
+		"Salut Monde!",
+		"text and template translation"
+		);
+	raises(
+		function() {
+			i18("{:h}", "fish & chips");
+		}, 
+		"undefined format raises exception"
+		);
+	i18.setFormat(":h", function(value) {
+		return value.toString().replace('&', '&amp;');
+	});
+	equal(
+		i18("<h1>{:h}</h1>", "Fish & Chips"),
+		"<h1>Fish &amp; Chips</h1>",
+		"set and use application's format(s)"
+		);
+	deepEqual(
+		i18.getKeys(), 
+		["Hello {}!", "World", "<h1>{:h}</h1>"],
+		"cache template and text"
+		);
+});
+
+</script>
+</body>
+</html>
