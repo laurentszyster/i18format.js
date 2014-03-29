@@ -13,8 +13,8 @@
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture"></div>
-<script type="text/javascript" src="i18format.js"></script>
-<script type="text/javascript" src="tests.js">
+<script type="text/javascript" src="../src/i18format.js"></script>
+<script type="text/javascript">
 
 test("window.i18format", function(){
 	var i18 = window.i18format;
@@ -42,7 +42,7 @@ test("window.i18format", function(){
 		"Salut Monde!",
 		"text and template translation"
 		);
-	raises(
+	throws(
 		function() {
 			i18("{:h}", "fish & chips");
 		}, 

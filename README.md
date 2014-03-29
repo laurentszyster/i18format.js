@@ -1,5 +1,7 @@
 i18format.js
 ===
+[![Build Status](https://travis-ci.org/laurentszyster/i18format.js.svg)](https://travis-ci.org/laurentszyster/i18format.js)
+
 Internationalisation for texts and format strings.
 
 Synopsis
